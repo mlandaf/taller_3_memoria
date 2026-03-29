@@ -76,10 +76,10 @@ flowchart TD
         A[instrucciones_generales]
     end
     subgraph SP[PRÁCTICA]
-        subgraph BLK_P["Bloque práctica ×3 (X = 1, 2, 3)"]
+        subgraph BLK_P["Bloque práctica × 3 (X = 1, 2, 3)"]
             B[instrucciones_practica_NBX]
             B --> LP
-            subgraph LP[loop_practica_NBX]
+            subgraph LP[loop_practica_NBX x 8]
                 P1[estimulo_practica] --> P2[respuesta_practica]
                 P2 --> P3[feedback_practica]
             end
@@ -93,7 +93,7 @@ flowchart TD
         subgraph BLK_E["Bloque experimental ×3 (X = 1, 2, 3)"]
             E[instrucciones_NBX]
             E --> LE
-            subgraph LE[loop_NBX]
+            subgraph LE[loop_NBX x 20]
                 E1[estimulo] --> E2[respuesta]
             end
         end
