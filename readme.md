@@ -71,50 +71,62 @@ taller_3_memoria/
 ### Flujo de la tarea
 
 ```mermaid
-flowchart TB
- subgraph LP["loop_practica_NBX"]
-        P3["feedback_practica"]
-        P2["respuesta_practica"]
-        P1["estimulo_practica"]
-  end
- subgraph BLK_P["Bloque práctica  ×3  (X = 1, 2, 3)"]
-        LP
-        B["instrucciones_practica_NBX"]
-  end
- subgraph LE["loop_NBX"]
-        E2["respuesta"]
-        E1["estimulo"]
-  end
- subgraph BLK_E["Bloque experimental  ×3  (X = 1, 2, 3)"]
-        LE
-        E["instrucciones_NBX"]
-  end
-    A["instrucciones_generales"] --> BLK_P
-    B --> LP
-    P1 --> P2
-    P2 --> P3
-    BLK_P --> C["fin_practica"]
-    C --> D["descanso 60 s"]
-    D --> BLK_E
-    E --> LE
-    E1 --> E2
-    BLK_E --> F["fin_experimento"]
+flowchart TD
+    subgraph SB[BIENVENIDA]
+        A[instrucciones_generales]
+    end
+    subgraph SP[PRÁCTICA]
+        subgraph BLK_P["Bloque práctica ×3 (X = 1, 2, 3)"]
+            B[instrucciones_practica_NBX]
+            B --> LP
+            subgraph LP[loop_practica_NBX]
+                P1[estimulo_practica] --> P2[respuesta_practica]
+                P2 --> P3[feedback_practica]
+            end
+        end
+        BLK_P --> C[fin_practica]
+    end
+    subgraph SD[DESCANSO]
+        D[descanso 60 s]
+    end
+    subgraph SE[EXPERIMENTAL]
+        subgraph BLK_E["Bloque experimental ×3 (X = 1, 2, 3)"]
+            E[instrucciones_NBX]
+            E --> LE
+            subgraph LE[loop_NBX]
+                E1[estimulo] --> E2[respuesta]
+            end
+        end
+    end
+    subgraph SC[CIERRE]
+        F[fin_experimento]
+    end
 
-    style P3  fill:#AFA9EC,stroke:#534AB7,color:#26215C
-    style P2  fill:#AFA9EC,stroke:#534AB7,color:#26215C
-    style P1  fill:#AFA9EC,stroke:#534AB7,color:#26215C
-    style LP  fill:#EEEDFE,stroke:#534AB7,color:#26215C
-    style B   fill:#AFA9EC,stroke:#534AB7,color:#26215C
-    style E2  fill:#5DCAA5,stroke:#0F6E56,color:#04342C
-    style E1  fill:#5DCAA5,stroke:#0F6E56,color:#04342C
-    style LE  fill:#E1F5EE,stroke:#0F6E56,color:#04342C
-    style E   fill:#5DCAA5,stroke:#0F6E56,color:#04342C
-    style A   fill:#D3D1C7,stroke:#D50000,color:#2C2C2A,fill:#FFCDD2
-    style BLK_P fill:#EEEDFE,stroke:#534AB7,color:#26215C
-    style C   fill:#D3D1C7,stroke:#534AB7,color:#2C2C2A,fill:#AFA9EC
-    style D   fill:#FAC775,stroke:#BA7517,color:#412402
-    style BLK_E fill:#E1F5EE,stroke:#0F6E56,color:#04342C
-    style F   fill:#D3D1C7,stroke:#FFD600,color:#2C2C2A,fill:#FFF9C4
+    A --> B
+    C --> D
+    D --> E
+    LE --> F
+
+    style A    fill:#6BA3D6,stroke:#2E6DA4,color:#0D2E4A
+    style F    fill:#E07B6A,stroke:#A83D2B,color:#3D0E07
+    style D    fill:#FAC775,stroke:#BA7517,color:#412402
+    style B    fill:#AFA9EC,stroke:#534AB7,color:#26215C
+    style C    fill:#AFA9EC,stroke:#534AB7,color:#26215C
+    style P1   fill:#AFA9EC,stroke:#534AB7,color:#26215C
+    style P2   fill:#AFA9EC,stroke:#534AB7,color:#26215C
+    style P3   fill:#AFA9EC,stroke:#534AB7,color:#26215C
+    style LP   fill:#EEEDFE,stroke:#534AB7,color:#26215C
+    style BLK_P fill:#F3F2FE,stroke:#534AB7,color:#26215C
+    style E    fill:#5DCAA5,stroke:#0F6E56,color:#04342C
+    style E1   fill:#5DCAA5,stroke:#0F6E56,color:#04342C
+    style E2   fill:#5DCAA5,stroke:#0F6E56,color:#04342C
+    style LE   fill:#E1F5EE,stroke:#0F6E56,color:#04342C
+    style BLK_E fill:#E8F8F3,stroke:#0F6E56,color:#04342C
+    style SB   fill:#EBF3FA,stroke:#2E6DA4,color:#0D2E4A
+    style SP   fill:#F8F7FF,stroke:#534AB7,color:#26215C
+    style SD   fill:#FEF9EE,stroke:#BA7517,color:#412402
+    style SE   fill:#F0FAF6,stroke:#0F6E56,color:#04342C
+    style SC   fill:#FAEAE7,stroke:#A83D2B,color:#3D0E07
 ```
 
 ---
